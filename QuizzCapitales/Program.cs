@@ -65,7 +65,7 @@ namespace QuizzCapitales
                         continuer = false;
                     }
                 }
-                Console.ReadKey();
+                //Console.ReadKey();
         }
     }
 }
