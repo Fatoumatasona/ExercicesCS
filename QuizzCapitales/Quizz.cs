@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace QuizzCapitales
@@ -46,47 +47,70 @@ namespace QuizzCapitales
         static string[] capitales = { "Tirana", "Berlin", "Andorre-la-vieille", "Vienne", "Bruxelles", "Minsk",
               "Sarajevo", "Sofia", "Nicosie", "Zagreb" };
 
-        static int bonnesRep = 0;
-        // Méthode Jouer
+        
+        
         public static void Jouer()
         {
-
             bool continuer = true;
             while (continuer)
             {
+                int bonnesRep = 0;
                 for (int i = pays.Length - 1; i >= 0; i--)
                 {
-                    PoserQuestion(i);
+                    if (PoserQuestion(i)) bonnesRep++;
                 }
                 Console.WriteLine($"\n{bonnesRep} bonnes réponses ");
-
-                Console.WriteLine($"Voulez-vous rejouer (O/N) ?");
-                string? rep = Console.ReadLine();
-                if (rep == "O" || rep == "o")
-                    Console.Clear();
-                else
+                continuer = DemanderSiRejouer();
+            }
+           
+        }
+        // Variante acceptant un nombre quelconque de numéros de questions
+        public static void Jouer(params int[] numQuestions)
+        {
+            bool continuer = true;
+            while (continuer)
+            {
+                int bonnesRep = 0;
+                foreach (int num in numQuestions)
                 {
-                    Console.WriteLine($"Merci d’avoir joué !");
-                    continuer = false;
+                    if(num > 0 && num <= pays.Length && PoserQuestion(num-1)) bonnesRep++;
                 }
+                Console.WriteLine($"\n{bonnesRep} bonnes réponses ");
+                continuer = DemanderSiRejouer();
             }
         }
 
-        public static bool PoserQuestion(int i)
+        static bool PoserQuestion(int numQuestion)
         {
-            bool repondre = false;
-            Console.WriteLine($"\nQuelle est la capitale de {pays[i]} ?");
+            Console.WriteLine($"\nQuelle est la capitale de {pays[numQuestion]} ?");
             string? reponse = Console.ReadLine();
-            if (capitales[i] == reponse)
+
+            if (reponse == capitales[numQuestion])
             {
-                Console.WriteLine("Bravo !"); bonnesRep++; repondre = true;
+                Console.WriteLine("Bravo !"); return true;
             }
             else
             {
-                Console.WriteLine($"Mauvaise réponse. La reponse était {capitales[i]}");
-                repondre = false;
+                Console.WriteLine($"Mauvaise réponse. La reponse était {capitales[numQuestion]}");
+                return false;
             }
-            return repondre;
+        }
+
+        static bool DemanderSiRejouer()
+        {
+            Console.WriteLine("Voulez-vous rejouer (O/N) ?");
+
+            string? rep = Console.ReadLine();
+            if (rep == "O" || rep == "o")
+            {
+                Console.Clear();
+                return true;
+            }
+            else
+            {
+                Console.WriteLine($"Merci d’avoir joué !");
+                return false;
+            }
         }
     }
 }
