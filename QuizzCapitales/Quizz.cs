@@ -47,8 +47,6 @@ namespace QuizzCapitales
         static string[] capitales = { "Tirana", "Berlin", "Andorre-la-vieille", "Vienne", "Bruxelles", "Minsk",
               "Sarajevo", "Sofia", "Nicosie", "Zagreb" };
 
-        
-        
         public static void Jouer()
         {
             bool continuer = true;
@@ -62,7 +60,6 @@ namespace QuizzCapitales
                 Console.WriteLine($"\n{bonnesRep} bonnes réponses ");
                 continuer = DemanderSiRejouer();
             }
-           
         }
         // Variante acceptant un nombre quelconque de numéros de questions
         public static void Jouer(params int[] numQuestions)
@@ -73,7 +70,7 @@ namespace QuizzCapitales
                 int bonnesRep = 0;
                 foreach (int num in numQuestions)
                 {
-                    if(num > 0 && num <= pays.Length && PoserQuestion(num-1)) bonnesRep++;
+                    if (num > 0 && num <= pays.Length && PoserQuestion(num - 1)) bonnesRep++;
                 }
                 Console.WriteLine($"\n{bonnesRep} bonnes réponses ");
                 continuer = DemanderSiRejouer();
