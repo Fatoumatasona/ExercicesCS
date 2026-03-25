@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace QuizzCapitales
 {
@@ -108,6 +109,40 @@ namespace QuizzCapitales
                 Console.WriteLine($"Merci d’avoir joué !");
                 return false;
             }
+        }
+
+        public static (int, int, int) Générer3Numéros()
+        {
+            (int n1, int n2, int n3) numéros;
+            Random rand = new Random();
+            numéros.n1 = rand.Next(1, 11);
+            numéros.n2 = rand.Next(1, 11);
+            numéros.n3 = rand.Next(1, 11);
+            return numéros;
+        }
+
+        static int SaisirNombre(int min, int max)
+        {
+            Console.WriteLine($"Saisissez un nombre compris entre {min} et {max}:");
+            int nombre;
+            bool repOk;
+            do
+            {
+                string? rep = Console.ReadLine();
+                repOk = int.TryParse(rep, out nombre) && nombre >= min && nombre <= max;
+            } while (!repOk);
+
+            return nombre;
+        }
+
+        public static (int, int, int) Saisir3Numéros()
+        {
+            (int n1, int n2, int n3) numéros;
+            numéros.n1 = SaisirNombre(1, 10);
+            numéros.n2 = SaisirNombre(1, 10);
+            numéros.n3 = SaisirNombre(1, 10);
+
+            return numéros;
         }
     }
 }
