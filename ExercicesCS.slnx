@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="QuizzCapitales/QuizzCapitales.csproj" />
+  <Project Path="RelevésMétéo/RelevésMétéo.csproj" Id="76e970d6-db77-4282-994c-43f390f7da0d" />
 </Solution>
