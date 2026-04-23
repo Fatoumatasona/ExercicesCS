@@ -26,6 +26,7 @@
                sommeTemp += temp;
          }
 
+
          Console.WriteLine();
          Console.WriteLine($"T° moyenne globale : {sommeTemp / (lignes.Length - 1)}");
       }
